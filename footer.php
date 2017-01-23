@@ -1,5 +1,8 @@
 </div>
 <!-- /#main -->
+
+
+
 <?php get_sidebar(); ?>
 
 <div class="clear"></div>
@@ -12,11 +15,11 @@
 </div>
 <!-- /#container -->
 
+
 <?php if(is_mobile()) { ?>
 
-
 <!-- このリンクでモーダルが表示-->
- 
+
 <div class="modal-window" id="modal-p01">
 <div class="modal-inner"><!-- ここからモーダルウィンドウの中身-->
 <?php
@@ -25,10 +28,10 @@
 ?>
     <ul class="clearfix">
 <!--ツイートボタン-->
-      <li class="twitter"> 
+      <li class="twitter">
        <a href="http://twitter.com/intent/tweet?url=<?php echo $url_encode ?>&text=<?php echo $title_encode ?>&via=manami1030 &tw_p=tweetbutton"><i class="fa fa-twitter"></i>&nbsp;<?php if(function_exists('scc_get_share_twitter')) echo (scc_get_share_twitter()==0)?'':scc_get_share_twitter(); ?></a>
       </li>
-<!--Facebookいいね！/シェアボタン-->      
+<!--Facebookいいね！/シェアボタン-->
       <li class="facebook">
        <a href="http://www.facebook.com/sharer.php?src=bm&u=<?php echo $url_encode;?>&t=<?php echo $title_encode;?>"><i class="fa fa-facebook"></i>&nbsp;<?php if(function_exists('scc_get_share_facebook')) echo (scc_get_share_facebook()==0)?'':scc_get_share_facebook(); ?></a>
       </li>
@@ -36,24 +39,52 @@
        <li class="googleplus">
   <a href="https://plus.google.com/share?url=<?php echo $url_encode;?>" ><i class="fa fa-google-plus"></i>&nbsp;<?php if(function_exists('scc_get_share_gplus')) echo (scc_get_share_gplus()==0)?'':scc_get_share_gplus(); ?></a>
       </li>
-<!--はてブボタン-->  
-      <li class="hatebu">       
+<!--はてブボタン-->
+      <li class="hatebu">
       <a href="http://b.hatena.ne.jp/add?mode=confirm&url=<?php echo $url_encode ?>"><i class="fa fa-hatena"></i>&nbsp;<?php if(function_exists('scc_get_share_hatebu')) echo (scc_get_share_hatebu()==0)?'':scc_get_share_hatebu(); ?></a>
       </li>
-      
- <!--LINEボタン-->   
+
+ <!--LINEボタン-->
       <li class="line">
-  <a href="http://line.me/R/msg/text/?<?php echo $title_encode . '%0A' . $url_encode;?>"><span class="icon-line"></span>&nbsp;</a>
-  </li>     
-<!--ポケットボタン-->      
+  <a href="http://line.me/R/msg/text/?<?php echo $title_encode . '%0A' . $url_encode . "?ref=line";?>"><span class="icon-line"></span>&nbsp;</a>
+  </li>
+<!--ポケットボタン-->
 <li class="pocket">
-<a href="http://getpocket.com/edit?url=<?php echo $url_encode;?>&title=<?php echo $title_encode;?>"><span class="icon-pocket"></span>&nbsp;<?php if(function_exists('scc_get_share_pocket')) echo (scc_get_share_pocket()==0)?'':scc_get_share_pocket(); ?></a></li>   
-         
+<a href="http://getpocket.com/edit?url=<?php echo $url_encode;?>&title=<?php echo $title_encode;?>"><span class="icon-pocket"></span>&nbsp;<?php if(function_exists('scc_get_share_pocket')) echo (scc_get_share_pocket()==0)?'':scc_get_share_pocket(); ?></a></li>
+
     </ul>
-<!-- ここまでモーダルウィンドウの中身-->      
+<!-- ここまでモーダルウィンドウの中身-->
 </div>
- <a href="#!" class="modal-close">&times;</a> 
+ <a href="#!" class="modal-close">&times;</a>
  </div>
+
+     <ul class="footer_menu">
+      <?php if(is_single()) { ?>
+ <?php
+        $prev_post = get_previous_post();
+        if (!empty( $prev_post )): ?>
+  <li><a href="<?php echo get_permalink( $prev_post->ID ); ?>"><i class="fa fa-chevron-circle-left"></i><br>前記事</a></li>
+   <?php endif; ?>
+   <?php
+        $next_post = get_next_post();
+        if (!empty( $next_post )): ?>
+  <li><a href="<?php echo get_permalink( $next_post->ID ); ?>"><i class="fa fa-chevron-circle-right"></i><br>次記事</a></li>
+     <?php endif; ?>
+  <?php } else { ?>
+     <?php } ?>
+<!--
+<li>
+<a href="http://mama-hack.com/ranking"><i class="fa fa-trophy"></i><br>人気記事</a>
+</li>
+-->
+<li><a href="http://mama-hack.com"><i class="fa fa-home"></i><br>ホーム</a></div></li>
+<li><!-- このリンクでモーダルが表示-->
+ <a href="#modal-p01"><i class="fa fa-share"></i><br>シェア</a>
+</li>
+<li><!-- ページトップへ戻る-->
+<div id="page-top"><a href="#wrapper"><i class="fa fa-chevron-circle-up"></i><br>トップ</a></div>
+</li>
+    </ul>
 
 <?php } else { ?>
 <div id="testfoot">
@@ -62,15 +93,24 @@
 <!-- ここからPCフッター内容１つめ　-->
 
 <div id="testfoot-cont1">
-<p class="foottitle">About</p>
+<p class="foottitle">ままはっくについて</p>
 
 <p class="describe">
 アクセスありがとうございます。<br>
 このブログは育児ブロガー・まなしばが、妊娠出産・子育て・WEBサービスについて書いている“ママ術”的ブログです。<br>
 よろしくどうぞ！ヽ(=´▽`=)ﾉ<br>
-<a href="http://mama-hack.com/ranking"><i class="fa fa-trophy"></i>本日のアクセスランキング</a>
+→<a href="http://mama-hack.com/about">まなしばの詳しいプロフィール</a><br>
+→<a href="https://twitter.com/manami1030" rel="nofollow">Twitter</a> | <a href="https://www.facebook.com/manamishibata.blog/" rel="nofollow">Facebook</a><br>
+→<a href="http://mama-hack.com/privacy">プライバシーポリシー</a>
 </p>
+</div>
 
+<div id="testfoot-cont1">
+<p class="foottitle">夫と開発したブロガー向けツール</p>
+<p class="describe">
+iOSとAndroidアプリ両方を探して紹介できるアプリ紹介ツール：<br>
+→<a href="http://mama-hack.com/app-reach/" target="_blank">アプリーチ</a>
+</p>
 </div>
 
 <!-- ここまでフッター内容１つめ　-->
@@ -120,34 +160,6 @@ query_posts($query) ;
 <!-- testfoot終わり　-->
 
  <?php if(is_mobile()) { ?>
-
-     <ul class="footer_menu">
-      <?php if(is_single()) { ?>
- <?php
-        $prev_post = get_previous_post();
-        if (!empty( $prev_post )): ?>
-  <li><a href="<?php echo get_permalink( $prev_post->ID ); ?>"><i class="fa fa-chevron-circle-left"></i><br>前の記事</a></li>
-   <?php endif; ?>
-   <?php
-        $next_post = get_next_post();
-        if (!empty( $next_post )): ?>
-  <li><a href="<?php echo get_permalink( $next_post->ID ); ?>"><i class="fa fa-chevron-circle-right"></i><br>次の記事</a></li>
-     <?php endif; ?>
-  <?php } else { ?>          
-     <?php } ?>
-<!--
-<li>
-<a href="http://mama-hack.com/ranking"><i class="fa fa-trophy"></i><br>人気記事</a>
-</li>
--->
-<li><a href="http://mama-hack.com"><i class="fa fa-home"></i><br>ホーム</a></div></li>
-<li><!-- このリンクでモーダルが表示-->
- <a href="#modal-p01"><i class="fa fa-share"></i><br>シェア</a>
-</li>
-<li><!-- ページトップへ戻る-->
-<div id="page-top"><a href="#wrapper"><i class="fa fa-chevron-circle-up"></i><br>TOP</a></div>
-</li>
-	</ul>
 <?php } else { ?> 
 
 <!-- ページトップへ戻る-->
@@ -168,7 +180,6 @@ query_posts($query) ;
       <?php bloginfo('description'); ?>
       </a></h4>
 <!--著作権リンク-->
-     <p class="stinger"><a href="http://stinger3.com">WordPress-Theme STINGER3</a></p>
     <p class="copy">Copyright&copy;
       <?php bloginfo('name');?>
       ,
@@ -198,13 +209,10 @@ strpos($_SERVER['HTTP_USER_AGENT'],'Android')!==false){
 }
 ?>
 
-
-
 <!-- ソーシャルボタンスクリプト読み込み -->
 
 <script>
 (function (w, d) {
-w._gaq = [["_setAccount", "UA-XXXXXXXX-X"],["_trackPageview"]];
 w.___gcfg = {lang: "ja"};
 var s, e = d.getElementsByTagName("script")[0],
 a = function (u, i) {
@@ -223,10 +231,66 @@ a("//connect.facebook.net/ja_JP/all.js#xfbml=1", "facebook-jssdk");
 })(this, document);
 </script>
 
-<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+<!-- GAイベントトラッキング仕込み -->
+<script type="text/javascript">jQuery(function() {  
+    jQuery("a").click(function(e) {        
+        var ahref = jQuery(this).attr('href');
+        if (ahref.indexOf("mama-hack.com") != -1 || ahref.indexOf("http") == -1 ) {
+            ga('send', 'event', '内部リンク', 'クリック', ahref);} 
+        else { 
+            ga('send', 'event', '外部リンク', 'クリック', ahref);}
+        });
+    });
+</script>
 
 
+<!-- リマーケティング タグの Google コード -->
+<!--------------------------------------------------
+リマーケティング タグは、個人を特定できる情報と関連付けることも、デリケートなカテゴリに属するページに設置することも許可されません。タグの設定方法については、こちらのページをご覧ください。
+http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 986836582;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/986836582/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 
+<!-- Yahoo Code for your Target List -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var yahoo_ss_retargeting_id = 1000322821;
+var yahoo_sstag_custom_params = window.yahoo_sstag_params;
+var yahoo_ss_retargeting = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//s.yimg.jp/images/listing/tool/cv/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//b97.yahoo.co.jp/pagead/conversion/1000322821/?guid=ON&script=0&disvt=false"/>
+</div>
+</noscript>
 
+<!-- Yahoo Code for your Target List -->
+<script type="text/javascript" language="javascript">
+/* <![CDATA[ */
+var yahoo_retargeting_id = 'A5ZGRTGSHU';
+var yahoo_retargeting_label = '';
+var yahoo_retargeting_page_type = '';
+var yahoo_retargeting_items = [{item_id: '', category_id: '', price: '', quantity: ''}];
+/* ]]> */
+</script>
+<script type="text/javascript" language="javascript" src="//b92.yahoo.co.jp/js/s_retargeting.js"></script>
+
+<script src="http://mama-hack.com/wp-content/convget/script.js"></script>
 
 </body></html>

@@ -4,7 +4,7 @@
 
 
 /*-------------
-ƒy[ƒWƒXƒNƒ[ƒ‹
+ï¿½yï¿½[ï¿½Wï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½
 -----------*/
 
 
@@ -12,7 +12,7 @@
 $(function() {
     var pageTop = $('#page-top');
     pageTop.hide();
-    //ƒXƒNƒ[ƒ‹‚ª400‚É’B‚µ‚½‚ç•\¦
+    //ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½400ï¿½É’Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
     $(window).scroll(function () {
         if($(this).scrollTop() > 400) {
             pageTop.fadeIn();
@@ -20,7 +20,7 @@ $(function() {
             pageTop.fadeOut();
         }
     });
-    //ƒXƒNƒ[ƒ‹‚µ‚Äƒgƒbƒv
+    //ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Äƒgï¿½bï¿½v
         pageTop.click(function () {
         $('body,html').animate({
             scrollTop: 0
@@ -30,26 +30,25 @@ $(function() {
   });
 
 /*---------------------------
-±º°ÃŞ¨µİ
+ï¿½ï¿½ï¿½ï¿½Ş¨ï¿½ï¿½
 ------------------------------*/
 
 $(document).ready(function(){
-  //acordion_tree‚ğˆê’U”ñ•\¦‚É
+  //acordion_treeï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½
   $(".acordion_tree").css("display","none");
-  //trigger‚ğƒNƒŠƒbƒN‚·‚é‚ÆˆÈ‰º‚ğÀs
+  //triggerï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ÆˆÈ‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½s
   $(".trigger").click(function(){
-    //‚à‚µ‚àƒNƒŠƒbƒN‚µ‚½trigger‚Ì’¼Œã‚Ì.acordion_tree‚ª”ñ•\¦‚È‚ç
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½triggerï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½.acordion_treeï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½È‚ï¿½
     if($("+.acordion_tree",this).css("display")=="none"){
-         //class‚Éactive‚ğ’Ç‰Á
+         //classï¿½ï¿½activeï¿½ï¿½ï¿½Ç‰ï¿½
          $(this).addClass("active");
-         //’¼Œã‚Ìacordion_tree‚ğƒXƒ‰ƒCƒhƒ_ƒEƒ“
+         //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½acordion_treeï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½Cï¿½hï¿½_ï¿½Eï¿½ï¿½
          $("+.acordion_tree",this).slideDown("normal");
   }else{
-    //class‚©‚çactive‚ğíœ
+    //classï¿½ï¿½ï¿½ï¿½activeï¿½ï¿½ï¿½íœ
     $(this).removeClass("active");
-    //ƒNƒŠƒbƒN‚µ‚½trigger‚Ì’¼Œã‚Ì.acordion_tree‚ª•\¦‚³‚ê‚Ä‚¢‚ê‚ÎƒXƒ‰ƒCƒhƒAƒbƒv
+    //ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½triggerï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½.acordion_treeï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ÎƒXï¿½ï¿½ï¿½Cï¿½hï¿½Aï¿½bï¿½v
     $("+.acordion_tree",this).slideUp("normal");
   }
   });
 });
-

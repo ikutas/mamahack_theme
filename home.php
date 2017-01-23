@@ -1,17 +1,17 @@
 <?php get_header(); ?>
 
-<div class="post kizi"> 
+<div class="post kizi">
 
-  
+
   <!--ループ開始-->
   <div id="dendo"> </div>
-  <!-- /#dendo -->
+  <!-- /#dendo! -->
 
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post();$loop_count++; ?>
 
   <div class="entry">
-    <div class="sumbox" 
+    <div class="sumbox"
 	<?php if ( function_exists('is_mobile') && is_mobile() ) :?>style="float:left;"<?php endif; ?>
 	　> <a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
       <?php if ( has_post_thumbnail() ): // サムネイルを持っているときの処理 ?>
@@ -31,20 +31,18 @@ array( 'alt' =>$title, 'title' => $title)); ?>
       <?php endif; ?>
       </a> </div>
     <!-- /.sumbox -->
-    
+
     <div class="entry-content">
 		<h5><span class="entry-date"><i class="fa fa-calendar"></i> <?php the_time('Y/m/d') ?></span>
 <div class="cat-smart">
 <?php
-$cats = get_the_category();
-$cat = $cats[0];
-if($cat->parent){
-$parent = get_category($cat->parent);
-echo $parent->cat_name;
-}else{
-echo $cat->cat_name;
+foreach((get_the_category()) as $cat) {
+$cat_id = $cat->cat_ID ;
+break ;
 }
+$category_link = get_category_link( $cat_id );
 ?>
+<a href="<?php echo $category_link; ?>" title="<?php echo $cat->cat_name; ?>"> <?php echo $cat->cat_name; ?></a>
 </div>
 </h5>
       <?php if (!(function_exists('is_mobile') && is_mobile())) :?>
@@ -55,7 +53,7 @@ echo $cat->cat_name;
 		<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
         <?php the_title(); ?>
 		</a></h3>
-		
+
 		<?php if ( function_exists('is_mobile') && is_mobile() ) :?>
 		<!--携帯の時はシェアカウントだけ-->
 	<span class="shares">
@@ -72,7 +70,6 @@ echo $cat->cat_name;
         </p>
       </div>
       <p class="dami"><?php echo mb_substr( strip_tags( stinger_noshotcode( $post->post_content ) ), 0, 0 ) . ''; ?></p>
-      <p class="motto"><a class="more-link" href="<?php the_permalink() ?>">記事を見る</a></p>
 	        <?php endif; ?>
     </div>
     <!-- .entry-content -->
@@ -81,20 +78,20 @@ echo $cat->cat_name;
   </div>
 
   <!--/entry-->
-  
-<?php if ( $loop_count == 1 || $loop_count == 5 || $loop_count == 9 ) : ?>
+
+<?php if ( $loop_count == 3 || $loop_count == 7 || $loop_count == 11 ) : ?>
 
 <?php if(is_mobile()) { ?>
 
 	<div class="more_pr_area">
 	<div class="more_pr_advert">
-	<p>SPONSERD LINK</p>
+	<p>スポンサードリンク</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- スマホ記事上（アーカイブ、固定ページ） -->
+<!-- 336×280 PCトップページ（３つ） -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:320px;height:100px"
+     style="display:inline-block;width:336px;height:280px"
      data-ad-client="ca-pub-6958489098141860"
-     data-ad-slot="2445524639"></ins>
+     data-ad-slot="5672497439"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
@@ -104,9 +101,9 @@ echo $cat->cat_name;
 
 	<div class="more_pr_area-top">
 	<div class="more_pr_advert-top">
-	<p>SPONSERD LINK</p>
+	<p>スポンサードリンク</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- PCトップページ上 -->
+<!-- 336×280 PCトップページ（３つ） -->
 <ins class="adsbygoogle"
      style="display:inline-block;width:336px;height:280px"
      data-ad-client="ca-pub-6958489098141860"
@@ -129,16 +126,16 @@ echo $cat->cat_name;
   <?php get_template_part('sns02');?>
 
 <?php endif; ?>
-  
+
   <!--ページナビ-->
-  
+
   <?php if (function_exists("pagination")) {
 pagination($wp_query->max_num_pages);
 } ?>
 
 
-  
-  <!--ループ終了--> 
+
+  <!--ループ終了-->
 </div>
 <!-- END div.post -->
 <?php get_footer();

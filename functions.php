@@ -63,48 +63,42 @@ add_theme_support( 'custom-background' );
 //ページャー機能
 function pagination($pages = '', $range = 4)
 {
-     $showitems = ($range * 2)+1;
- 
+     $showitems = 100;
+
      global $paged;
      if(empty($paged)) $paged = 1;
- 
+
      if($pages == '')
      {
          global $wp_query;
-         $pages = $wp_query->max_num_pages;
+	$pages = $wp_query->max_num_pages;
          if(!$pages)
          {
              $pages = 1;
          }
      }
- 
+
      if(1 != $pages)
      {
-         echo "<div class=\"pagination\"><span>Page ".$paged." of ".$pages."</span>";
+         echo "<div class=\"pagination\">";
          if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link
 
-(1)."'>&laquo; First</a>";
-         if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo;
-
-Previous</a>";
- 
+(1)."'>1</a>";
          for ($i=1; $i <= $pages; $i++)
          {
              if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems
 
 ))
              {
-                 echo ($paged == $i)? "<span class=\"current\">".$i."</span>":"<a href='".get_pagenum_link
+                 echo ($paged == $i)? "<span class=\"current\">♥</span>":"<a href='".get_pagenum_link
 
 ($i)."' class=\"inactive\">".$i."</a>";
              }
          }
- 
-         if ($paged < $pages && $showitems < $pages) echo "<a href=\"".get_pagenum_link($paged +
 
-1)."\">Next &rsaquo;</a>";
+
          if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
-         echo "</div>\n";
+         echo "<script>$('.pagination')[0].scrollLeft = $('.pagination .current').position().left - 100;</script></div>\n";
      }
 }
 
@@ -173,7 +167,7 @@ register_sidebars(1,
     ));
 
 //contents widthの指定
-if ( ! isset( $content_width ) ) $content_width = 546;
+if ( ! isset( $content_width ) ) $content_width = 600;
 
 //更新日の追加
 function get_mtime($format) {
@@ -267,22 +261,21 @@ add_filter('post_class', 'remove_hentry');
 //more位置へ挿入
 add_filter('the_content', 'adMoreReplace');
 function adMoreReplace($contentData) {
+
+
+if(is_mobile()) {
+
 $adTags = <<< EOD
 
 <div class="more_pr_area">
-     <div class="more_pr_advert">
-     <p>SPONSERD LINK</p>
-<style>
-.my_adslot { width: 336px; height: 280px; }
-@media(min-width: 500px) { .my_adslot { width: 336px; height: 280px; } }
-@media(min-width: 800px) { .my_adslot { width: 336px; height: 280px; } }
-</style>
+     <div class="more_pr_advert" style="font-size:0;">
+     <p>SPONSORED LINK</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 記事中レスポンシブ -->
-<ins class="adsbygoogle my_adslot"
-     style="display:inline-block"
+<!-- ままはっく記事上 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
      data-ad-client="ca-pub-6958489098141860"
-     data-ad-slot="2911339433"></ins>
+     data-ad-slot="3877928637"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
@@ -291,9 +284,35 @@ $adTags = <<< EOD
 
 EOD
 ;
-$contentData = preg_replace('/<p><span id="more-([0-9]+?)"><\/span>(.*?)<\/p>/i', $adTags, $contentData);
-$contentData = str_replace('', "", $contentData);
-$contentData = str_replace('', '', $contentData);
+}else{
+
+$adTags = <<< EOD
+<div class="more_pr_area">
+     <div class="more_pr_advert" style="font-size:0;">
+     <p>SPONSORED LINK</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ままはっく記事上 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-6958489098141860"
+     data-ad-slot="3877928637"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+
+EOD
+;
+
+}
+
+
+if((is_single())&&(!in_category(array('156','178','168')))){
+  $contentData = preg_replace('/<p><span id="more-([0-9]+?)"><\/span>(.*?)<\/p>/i', $adTags, $contentData);
+  $contentData = str_replace('', "", $contentData);
+  $contentData = str_replace('', '', $contentData);
+}
 return $contentData;
 }
 
@@ -303,61 +322,6 @@ function browser_shot_target_blank( $content){
 }
 add_filter( 'the_content', 'browser_shot_target_blank', 9999);
 
-/* Name : Resize an image at upload
- * Version: 1.0.0
- * Author : Otokuni Consulting Co.,Ltd.
- * Author URI: http://www.oto-con.com/
- * License: GPLv2 or later
- * Description : This function is useful when the user often upload very large size image.
- */
-
-/*
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
-
-function otocon_resize_at_upload( $file ) {
-  // $file contains file, url, type
-  // array( 'file' => 'path to the image', 'url' => 'url of the image', 'type' => 'mime type' )
-
-  // resize only if the mime type is image
-  if ( $file['type'] == 'image/jpeg' OR $file['type'] == 'image/gif' OR $file['type'] == 'image/png') {
-
-    // set width and height
-    $w = intval(get_option( 'large_size_w' ) ); // get large size width
-    $h = intval(get_option( 'large_size_h' ) ); // get large size height
-
-    // get the uploaded image
-    $image = wp_get_image_editor( $file['file'] );
-
-    // if no error
-    if ( ! is_wp_error( $image ) ){
-      // get image width and height
-      $size = getimagesize( $file['file'] ); // $size[0] = width, $size[1] = height
-
-      if ( $size[0] > $w || $size[1] > $h ){ // if the width or height is larger than the large-size
-        $image->resize( $w, $h, false ); // resize the image
-        $final_image = $image->save( $file['file'] ); // save the resized image
-      }
-    }
-
-  } // if mime type
-
-  return $file;
-
-}
-add_action( 'wp_handle_upload', 'otocon_resize_at_upload' );
 
 //ウィジェットカテゴリカスタマイズ
 function theme_list_categories( $output, $args ) {
@@ -374,31 +338,44 @@ add_filter( 'wp_list_categories', 'theme_list_categories', 10, 2 );
 add_filter( 'the_content', 'my_insert_ads_into_posts' );
 function my_insert_ads_into_posts( $content ) {
     global $my_menu_name;
-    if(is_single()){
-        $my_ad_code = '<!--  アドセンス　記事上のレスポンシブ -->
-    <div class="more_pr_area">
-    <div class="more_pr_advert">
-    <p>SPONSERD LINK</p>
-<style>
-.my_adslot { width: 336px; height: 280px; }
-@media(min-width: 500px) { .my_adslot { width: 336px; height: 280px; } }
-@media(min-width: 800px) { .my_adslot { width: 336px; height: 280px; } }
-</style>
+if((is_single())&&(!in_category(array('156','178','168')))){
+        $pc_ad_code = '
+        <!--  アドセンス 記事上のレスポンシブ -->
+            <div class="more_pr_area">
+            <div class="more_pr_advert">
+            <p>SPONSORED LINK</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 記事上レスポンシブ -->
-<ins class="adsbygoogle my_adslot"
-     style="display:inline-block"
+<!-- ままはっく記事中 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
      data-ad-client="ca-pub-6958489098141860"
-     data-ad-slot="1155404633"></ins>
+     data-ad-slot="5354661838"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-    </div>
-    </div>
+        </div></div>
 ';
-        if (!is_admin() ) {
-            return my_insert_before( $content,2, '<h2' , $my_ad_code );
-        }
+		$sp_ad_code = '
+
+<!--  アドセンス 記事上のレスポンシブ -->
+                <div class="more_pr_area">
+                <div class="more_pr_advert">
+                <p>SPONSORED LINK</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ままはっく記事中 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-6958489098141860"
+     data-ad-slot="5354661838"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>        </div></div>
+';
+		if(is_mobile()) {
+			return my_insert_before( $content,2, '<h2' , $sp_ad_code );
+		}else {
+			return my_insert_before( $content,2, '<h2' , $pc_ad_code );
+		}
         return $content;
     }
     else
@@ -406,47 +383,39 @@ function my_insert_ads_into_posts( $content ) {
     return $content;
     }
 }
+
 /*****3番目のh2タグの直前にアドセンスを埋め込むコード********/
 add_filter( 'the_content', 'my_insert_ads_into_posts2' );
 function my_insert_ads_into_posts2( $content) {
     global $my_menu_name;
-    if(is_single()){
-        $pc_ad_code = '    <div class="more_pr_area">
+if((is_single())&&(!in_category(array('156','178','168')))){
+        $pc_ad_code = '<div class="more_pr_area">
     <div class="more_pr_advert">
-    <p>SPONSERD LINK</p>
-<style>
-.my_adslot { width: 336px; height: 280px; }
-@media(min-width: 500px) { .my_adslot { width: 336px; height: 280px; } }
-@media(min-width: 800px) { .my_adslot { width: 336px; height: 280px; } }
-</style>
+    <p>SPONSORED LINK</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 記事下レスポンシブ -->
-<ins class="adsbygoogle my_adslot"
-     style="display:inline-block"
+<!-- ままはっく記事下 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
      data-ad-client="ca-pub-6958489098141860"
-     data-ad-slot="8525077434"></ins>
+     data-ad-slot="6831395033"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
-</script></div></div>
+</script>
+</div></div>
 ';
-        $sp_ad_code = '    <div class="more_pr_area">
+        $sp_ad_code = '<div class="more_pr_area">
     <div class="more_pr_advert">
-<p>SPONSERD LINK</p>
-<style>
-.my_adslot { width: 336px; height: 280px; }
-@media(min-width: 500px) { .my_adslot { width: 336px; height: 280px; } }
-@media(min-width: 800px) { .my_adslot { width: 336px; height: 280px; } }
-</style>
+    <p>SPONSORED LINK</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 記事下レスポンシブ -->
-<ins class="adsbygoogle my_adslot"
-     style="display:inline-block"
+<!-- ままはっく記事下 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
      data-ad-client="ca-pub-6958489098141860"
-     data-ad-slot="8525077434"></ins>
+     data-ad-slot="6831395033"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
-</script></div></div>
-
+</script>
+</div></div>
 ';
         if(is_mobile()) {
             return my_insert_before( $content,3, '<h2' , $sp_ad_code );
@@ -460,6 +429,7 @@ function my_insert_ads_into_posts2( $content) {
     return $content;
     }
 }
+
 function my_insert_after( $my_content , $my_ikutume, $my_kugiri, $my_insert ) {
     $kugirare_parts = explode( $my_kugiri, $my_content );
     foreach ($kugirare_parts as $index => $kugirare_part) {
@@ -506,4 +476,57 @@ function showads() {
 }
 
 add_shortcode('adsense', 'showads');
+
+add_filter( 'ppp_nonce_life', 'my_nonce_life' );
+function my_nonce_life() {
+	return 60 * 60 * 24 * 14;	// 14 日間（秒×分×時間×日）
+}
+
+//$is_ipadを追加
+function is_ipad() {
+    $is_ipad = (bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPad');
+    if ($is_ipad) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//$is_iphoneか$is_ipadがtrueの場合にwp_headにCSSを出力
+if($is_iphone or $is_ipad){
+    function noHoverForIos(){
+        echo "<style>.hover{opacity:1 !important;}</style>";
+    };
+    add_action('wp_head', 'noHoverForIos');
+}
+
+//コンタクトフォーム7の読み込みを軽くする
+function my_contact_enqueue_scripts(){
+wp_deregister_script('contact-form-7');
+wp_deregister_style('contact-form-7');
+if (is_page('contact')) {
+	if (function_exists( 'wpcf7_enqueue_scripts')) {
+        wpcf7_enqueue_scripts();
+	}
+	if ( function_exists( 'wpcf7_enqueue_styles' ) ) {
+	wpcf7_enqueue_styles();
+	}
+}
+}
+add_action( 'wp_enqueue_scripts', 'my_contact_enqueue_scripts');
+
+//カテゴリー説明文でHTMLタグを使う
+remove_filter( 'pre_term_description', 'wp_filter_kses' );
+
+
+// 不要なコードをまとめて削除
+// WordPressのバージョン情報
+remove_action('wp_head', 'wp_generator');
+// ブログ投稿ツール用
+remove_action('wp_head', 'rsd_link');
+// デフォルトURLの表記
+remove_action('wp_head', 'wp_shortlink_wp_head');
+// Windows Live Writer用
+remove_action( 'wp_head', 'wlwmanifest_link' );
+
 ?>
