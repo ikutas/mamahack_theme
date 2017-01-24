@@ -596,6 +596,7 @@ function my_amp_post_custom_add_script($data)
     // 全てのページで使うことが分かっている
     $data['amp_component_scripts']['amp-carousel'] = 'https://cdn.ampproject.org/v0/amp-carousel-0.1.js';
     $data['amp_component_scripts']['amp-ad'] = 'https://cdn.ampproject.org/v0/amp-ad-0.1.js';
+    $data['amp_component_scripts']['amp-analytics'] = 'https://cdn.ampproject.org/v0/amp-analytics-0.1.js';
 
     return $data;
 }
@@ -615,22 +616,7 @@ function convert_content_to_amp_sample($the_content)
   $append = '';
   $the_content = preg_replace($pattern, $append, $the_content);
 
-  // Instagramをamp-instagramに置換する
-  $pattern = '/<blockquote class="instagram-media".+?"https:\/\/www.instagram.com\/p\/(.+?)\/".+?<\/blockquote>/is';
-  $append = '<p><amp-instagram layout="responsive" data-shortcode="$1" width="600" height="600" ></amp-instagram></p>';
-  $the_content = preg_replace($pattern, $append, $the_content);
-
-  // adsenseを置換する
-  $pattern = '/<ins class="adsbygoogle".+?><\/ins>/is';
-  $append = '<amp-ad $1></amp-ad>';
-  $the_content = preg_replace($pattern, $append, $the_content);
-
   // 目次を除去する
-  $pattern = '/<div id="toc_container".+?<\/div>/is';
-  $append = '';
-  $the_content = preg_replace($pattern, $append, $the_content);
-
-  // cssを読み込む
   $pattern = '/<div id="toc_container".+?<\/div>/is';
   $append = '';
   $the_content = preg_replace($pattern, $append, $the_content);
@@ -646,6 +632,33 @@ function my_amp_post_custom_add_css($amp_template)
         return false;
     }
     include get_template_directory().'/minify.css';
-    include get_template_directory().'/amp.css';
+    include get_template_directory().'/amp/amp.css';
+}
+
+add_filter( 'amp_post_template_analytics', 'my_amp_add_custom_analytics' );
+function my_amp_add_custom_analytics( $analytics ) {
+    if ( ! is_array( $analytics ) ) {
+        $analytics = array();
+    }
+
+    // https://developers.google.com/analytics/devguides/collection/amp-analytics/
+    $analytics['my-googleanalytics'] = array(
+        'type' => 'googleanalytics',
+        'attributes' => array(
+            // 'data-credentials' => 'include',
+        ),
+        'config_data' => array(
+            'vars' => array(
+              'account' => "UA-46198487-1"
+            ),
+            'triggers' => array(
+                'trackPageview' => array(
+                    'on' => 'visible',
+                    'request' => 'pageview',
+                ),
+            ),
+        ),
+    );
+    return $analytics;
 }
 ?>
