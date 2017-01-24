@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 
-
 <div class="kuzu">
 
 

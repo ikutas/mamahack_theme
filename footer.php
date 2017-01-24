@@ -160,7 +160,7 @@ query_posts($query) ;
 <!-- testfoot終わり　-->
 
  <?php if(is_mobile()) { ?>
-<?php } else { ?> 
+<?php } else { ?>
 
 <!-- ページトップへ戻る-->
 <div id="page-top"><a href="#wrapper">TOP <i class="fa fa-chevron-up"></i></a></div>
@@ -186,22 +186,22 @@ query_posts($query) ;
       <?php the_date('Y');?>
       All Rights Reserved.</p>
   </div>
-  <!-- /#footer-in --> 
+  <!-- /#footer-in -->
 </div>
 <?php wp_footer(); ?>
 
 
 
- 
+
 <!---js切り替え--->
-<?php 
+<?php
 if(strpos($_SERVER['HTTP_USER_AGENT'],'ipod')!==false ||
 strpos($_SERVER['HTTP_USER_AGENT'],'iPhone')!==false ||
 strpos($_SERVER['HTTP_USER_AGENT'],'Windows Phone')!==false ||
 strpos($_SERVER['HTTP_USER_AGENT'],'Android')!==false){
 ?>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/smartbase.js" async defer ></script>
-<?php 
+<?php
 }else{
 ?>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/base.js"></script>
@@ -232,12 +232,12 @@ a("//connect.facebook.net/ja_JP/all.js#xfbml=1", "facebook-jssdk");
 </script>
 
 <!-- GAイベントトラッキング仕込み -->
-<script type="text/javascript">jQuery(function() {  
-    jQuery("a").click(function(e) {        
+<script type="text/javascript">jQuery(function() {
+    jQuery("a").click(function(e) {
         var ahref = jQuery(this).attr('href');
         if (ahref.indexOf("mama-hack.com") != -1 || ahref.indexOf("http") == -1 ) {
-            ga('send', 'event', '内部リンク', 'クリック', ahref);} 
-        else { 
+            ga('send', 'event', '内部リンク', 'クリック', ahref);}
+        else {
             ga('send', 'event', '外部リンク', 'クリック', ahref);}
         });
     });

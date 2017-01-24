@@ -1,0 +1,41 @@
+body {
+    background-color: #fff;
+}
+
+amp-img.alignleft {
+    float: none;
+}
+
+h3 {
+    font-size: 150%;
+    font-weight: bold;
+    margin: 1em 0 0.5em 0;
+    padding: 10px 10px;
+    border-left: solid 10px #FF6418;
+    border-bottom-style: none;
+    background-color: #fff;
+    line-height: 36px;
+}
+
+h4 {
+    color: #666666;
+    background: #ffffff;
+    font-size: 16px;
+    line-height: 1;
+    margin: 10px 0px;
+    padding: 10px 5px 10px 5px;
+    border-bottom: 4px solid #FEDC00;
+    border-radius: 0px;
+}
+
+#navi-in2 ul, #related li, #share2 ul, .entry-head-related ul.wpp-list li, .modal-inner li, .modal-inner ul, .ninki-post ul.wpp-list li, .sns-side ul, .wpp-list li, ol, ul {
+    list-style: inherit;
+}
+
+.point {
+	background: url(http://mama-hack.com/wp-content/themes/stinger3ver20131023/img/bg_stripe.png);
+}
+
+.ilink_inner amp-img {
+    float: left;
+}
