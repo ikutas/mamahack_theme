@@ -3499,6 +3499,15 @@ margin-bottom: 0px;
     float: left;
     margin-right: 0.8rem;
 }
+.ilink .ilink_img {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    float: left;
+    margin-right: 0.8rem;
+    background-size: cover;
+    background-position: center;
+}
 .ilink .title, .ilink .front {
     background-size: 14px 14px;
 }

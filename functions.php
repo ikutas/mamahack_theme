@@ -611,6 +611,11 @@ function convert_content_to_amp_sample($the_content)
   $append = '';
   $the_content = preg_replace($pattern, $append, $the_content);
 
+  // adsenseを差し替える
+  $pattern = '/<ins class="adsbygoogle".+?><\/ins>/is';
+  $append = '<amp-ad $1></amp-ad>';
+  $the_content = preg_replace($pattern, $append, $the_content);
+
   return $the_content;
 }
 add_filter('the_content', 'convert_content_to_amp_sample', 999999999);
