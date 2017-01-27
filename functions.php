@@ -1,14 +1,4 @@
 <?php
-function register_user_script()
-{
-    if (!is_admin()) {
-        $script_directory = get_template_directory_uri();
-        wp_deregister_script('jquery');
-        wp_enqueue_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js');
-    }
-}
-add_action('init', 'register_user_script');
-
 //アイキャッチサムネイル
 add_theme_support('post-thumbnails');
 add_image_size('thumb80', 80, 80, true);

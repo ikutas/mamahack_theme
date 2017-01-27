@@ -190,9 +190,7 @@ query_posts($query) ;
 </div>
 <?php wp_footer(); ?>
 
-
-
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <!---js切り替え--->
 <?php
 if(strpos($_SERVER['HTTP_USER_AGENT'],'ipod')!==false ||

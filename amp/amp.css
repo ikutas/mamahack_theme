@@ -33,9 +33,28 @@ h4 {
 }
 
 .point {
-	background: url(http://mama-hack.com/wp-content/themes/stinger3ver20131023/img/bg_stripe.png);
+    background: url(http://mama-hack.com/wp-content/themes/stinger3ver20131023/img/bg_stripe.png);
 }
 
 .ilink_inner amp-img {
     float: left;
+    width: 80px !important;
+    height: 80px;
+    margin-right: .8rem;
+}
+
+.ilink .ilink_inner img {
+    margin-right: 0;
+}
+
+#appreach-box amp-img {
+    margin: 10px;
+}
+
+#appreach-developer, #appreach-price, #appreach-powered, #appreach-itunes-link, #appreach-gplay-link {
+    display: inline-block;
+}
+
+#appreach-itunes-link amp-img, #appreach-gplay-link amp-img {
+    margin: 0;
 }

@@ -28,9 +28,9 @@ BASE
 }
 
 p {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 26px;
-    margin-bottom: 28px;
+    margin-bottom: 26px;
 }
 body {
     -webkit-text-size-adjust: 100%;
@@ -248,8 +248,8 @@ a:hover {
 h2 {
     color: #ffffff;
     background: #0b4b95;
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 22px;
+    line-height: 26px;
     margin-top: 30px;
     margin-right: -10px;
     margin-bottom: 20px;
@@ -333,7 +333,7 @@ h2 {
     color: #666666;
     background: #ffffff;
     font-size: 18px;
-    line-height: 1;
+    line-height: 22px;
     margin: 10px 0px;
     padding: 10px 5px 10px 5px;
     border-bottom: 4px solid #FEDC00;
@@ -1475,8 +1475,9 @@ PREV NEXT
 single h3
 ------------------------------*/
 .single h3 {
-    font-size: 120%;
+    font-size: 20px;
     font-weight: bold;
+    line-height: 24px;
     margin: 2em 0 1em 0;
     padding: 15px 10px;
     border-left: solid 10px #FF6418;
