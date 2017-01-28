@@ -234,6 +234,12 @@ a:hover {
 .entry-title-ac {
     font-size: 18px;
 }
+.entry-title-smart {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background-color: inherit !important;
+}
 .entry-title-smart a {
     padding: 0px;
     font-size: 14px;

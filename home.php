@@ -48,7 +48,7 @@ $category_link = get_category_link( $cat_id );
       <?php if (!(function_exists('is_mobile') && is_mobile())) :?>
 		<h3 class="entry-title-ac">
       <?php else: ?>
-    <h1 class="entry-title-smart">
+    <h3 class="entry-title-smart">
     <?php endif;?>
 		<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
         <?php the_title(); ?>
