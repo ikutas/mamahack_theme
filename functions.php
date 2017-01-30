@@ -1,9 +1,6 @@
 <?php
 //アイキャッチサムネイル
 add_theme_support('post-thumbnails');
-add_image_size('thumb80', 80, 80, true);
-add_image_size('thumb65', 100, 65, true);
-add_image_size('thumb100', 100, 100, true);
 add_image_size('thumb110', 110, 110, true);
 
 //WordPress の投稿スラッグを自動的に生成する
