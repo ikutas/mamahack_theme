@@ -116,23 +116,6 @@ ga('require', 'linkid', 'linkid.js');
 
 </script>
 
-<!--Ptengine-->
-<script type="text/javascript">
-	window._pt_sp_2 = [];
-	_pt_sp_2.push('setAccount,565deb2a');
-	var _protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-
-	(function() {
-		var atag = document.createElement('script'); atag.type = 'text/javascript'; atag.async = true;
-		atag.src = _protocol + 'jsv2.ptengine.jp/pta.js';
-		var stag = document.createElement('script'); stag.type = 'text/javascript'; stag.async = true;
-		stag.src = _protocol + 'jsv2.ptengine.jp/pts.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(atag, s);s.parentNode.insertBefore(stag, s);
-	})();
-</script>
-
-
 <!--OGP開始-->
 <meta property="fb:app_id" content="592550390888614">
 <meta property="og:locale" content="ja_JP">
@@ -241,7 +224,7 @@ src="https://www.facebook.com/tr?id=499679120214540&ev=PageView&noscript=1"
 <div id="header">
   <div id="header-in">
     <div id="h-l">
-      <p class="sitename"><a href="<?php echo home_url(); ?>/"><img alt="ままはっく" src="http://mama-hack.com/wp-content/uploads/2014/07/mamahack_dot.png"></a></p>
+      <p class="sitename"><a href="<?php echo home_url(); ?>/"><img alt="ままはっく" src="http://mama-hack.com/wp-content/themes/stinger3ver20131023/images/mamahack_dot.png"></a></p>
       <?php if (is_home()) { ?>
       <h1 class="descr">
         <?php bloginfo('description'); ?>
